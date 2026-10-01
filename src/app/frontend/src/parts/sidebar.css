@@ -1,0 +1,89 @@
+@media (min-width: 0px){
+    .sidebar{
+        width: 100%;
+        max-height: 50%;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding: 10px 10px;
+        background-color: var(--card-bg);
+        border-radius: 0 0px 12px 12px;
+        overflow: auto;
+    }
+
+    .sidebar-item{
+        height: fit-content;
+        width: 100%;
+        display: flex;
+        gap: 5px;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--alternate-bg);
+        border-radius: 7px;
+        padding: 5px 10px;
+    }
+
+    .sidebar-item > h1 {
+        width: 100%;
+        font-size: 1.3em;
+        margin: 5px 0;
+        border-bottom: 1px solid var(--text);
+    }
+
+    .sidebar-item > .buttons {
+        display: flex;
+        gap: 15px;
+    }
+
+    .sidebar-item > .buttons button{
+        font-size: 1em;
+        background-color: var(--card-bg);
+        border: 1px solid var(--border);
+        padding: 5px 15px;
+        border-radius: 7px;
+    }
+
+    .sidebar-item > table{
+        width: 100%;
+    }
+
+    .sidebar-item > table th{
+        text-align: left;
+    }
+
+    .sidebar-item > table td{
+        text-align: right;
+    }
+
+    .sidebar-item > form{
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        gap: 5px;
+    }
+
+    .sidebar-item > form > input{
+        background-color: var(--card-bg);
+        outline: none;
+        border: none;
+        border-radius: 7px;
+    }
+
+    .sidebar-item > form > input[type=text]{
+        width: 100%;
+        padding: 5px;
+    }
+
+    .sidebar-item > form > input[type=submit]{
+        padding: 5px 15px;
+    }
+}
+
+@media (min-width: 1000px){
+    .sidebar{
+        width: 25%;
+        max-height: 100%;
+        border-radius: 0 12px 12px 0;
+    }
+}

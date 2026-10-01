@@ -1,0 +1,32 @@
+.status-light{
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    border: 5px double;
+    border-radius: 7px;
+    padding: 10px 15px;
+    gap: 10px;
+    background-color: var(--card-bg);
+}
+
+.status-light > .led{
+    width: 50%;
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+}
+
+.status-light.online{
+    border-color: var(--accent2);
+}
+
+.status-light.offline{
+    border-color: var(--accent1);
+}
+
+.status-light.online > .led{
+    background-color: var(--accent2);
+}
+
+.status-light.offline > .led{
+    background-color: var(--accent1);
+}

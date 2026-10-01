@@ -1,0 +1,39 @@
+@media (min-width: 0px){
+    .mainframe{
+        height: calc(100% - 100px);
+        max-height: calc(100% - 100px);
+        display: flex;
+        flex-direction: column;
+        border-radius: 12px;
+    }
+
+    .mainframe.online{
+        background-color: var(--accent2);
+        border: 1px solid var(--accent2);
+    }
+
+    .mainframe.offline{
+        background-color: var(--accent1);
+        border: 1px solid var(--accent1);
+    }
+
+    .maplibregl-map{
+        width: 100%;
+        height: 50%;
+        border-radius: 12px 12px 0 0;
+    }
+}
+
+@media (min-width: 1000px){
+    .mainframe{
+        height: calc(100% - 65px);
+        max-height: calc(100% - 65px);
+        flex-direction: row;
+    }
+
+    .maplibregl-map{
+        width: 75%;
+        height: 100%;
+        border-radius: 12px 0 0 12px;
+    }
+}

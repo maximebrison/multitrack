@@ -1,0 +1,87 @@
+@media (min-width: 0px){
+    nav{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        height: 90px;
+    }
+
+    .topbar-left{
+        width: 100%;
+    }
+
+    .topbar-left > h1{
+        margin: 0;
+        font-size: 2em;
+    }
+
+    .topbar-right{
+        width: 100%;
+        display: flex;
+        flex-direction: row-reverse;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .topbar-right > button, .topbar-quick-access > button{
+        background-color: var(--card-bg);
+        border: none;
+        height: 50px;
+        aspect-ratio: 1 / 1;
+        font-size: 1.2em;
+        border-radius: 7px;
+    }
+
+    .topbar-right > form{
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+        width: 500px;
+        height: 35px;
+    }
+
+    .topbar-right > form > input{
+        background-color: var(--card-bg);
+        outline: none;
+        border: none;
+        border-radius: 7px;
+    }
+
+    .topbar-right > form > input[type=text]{
+        width: 100%;
+        padding: 5px;
+    }
+
+    .topbar-right > form > input[type=submit]{
+        padding: 5px 15px;
+    }
+
+    .topbar-quick-access{
+        position: relative;
+    }
+
+    .topbar-quick-access-dropdown{
+        position: absolute;
+        width: 150px;
+        height: fit-content;
+        background-color: red;
+        right: 0;
+        margin-top: 10px;
+    }
+}
+
+@media (min-width: 1000px){
+    nav{
+        flex-direction: row;
+        height: 75px;
+    }
+
+    .topbar-left{
+        width: 50%;
+    }
+
+    .topbar-right{
+        width: 50%;
+    }
+}

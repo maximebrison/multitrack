@@ -1,0 +1,26 @@
+:root{
+	--bg: #FEFEFE;
+	--bg-trans: rgba(255, 240, 235, 0.8);
+	--alternate-bg: #FFF1D6;
+	--alternate-bg-trans: rgba(255, 241, 214, 0.2);
+	--card-bg: #FFF8EB;
+	--card-bg-trans: rgba(40, 40, 42, 0.2);
+	--alternate-card-bg: #FFEAC2;
+	--alternate-card-bg-trans: rgba(40, 40, 42, 0.2);
+	--banner: #202022;
+	--banner-trans: rgba(32, 32, 34, 0.2);
+	--border: #FFC759;
+	--border-trans: rgba(255, 199, 89, 0.2);
+	--text: #121516;
+	--text-trans: rgba(18, 21, 22, 0.8);
+	--accent1: #C8553D;
+	--accent1-trans: rgba(200, 85, 61, 0.2);
+	--accent2: #28965A;
+	--accent2-trans: rgba(40, 150, 90, 0.2);
+	--accent3: #5972D9;
+	--accent3-trans: rgba(89, 114, 217, 0.2);
+	--scrollbar-thumb: #C8553D;
+	--scrollbar-thumb-trans: rgba(200, 85, 61, 0.2);
+	--pre: #F1F2EE;
+	--pre-trans: rgba(241, 242, 238, 0.2);
+}

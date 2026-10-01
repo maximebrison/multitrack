@@ -1,0 +1,22 @@
+.settings-modal{
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.3);
+}
+
+.settings-modal-content{
+    width: 60%;
+    height: 60%;
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: 
+        0 4px 8px 0 rgba(0, 0, 0, 0.2), 
+        0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
