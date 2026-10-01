@@ -2,6 +2,7 @@ import { Discoverer } from "./Discoverer.ts";
 import { log } from "node:console";
 import type { driver, envelope, signedEnvelope } from "./@types/multitrack.js";
 import { WSServerHandler } from "./WSServerHandler.ts";
+import { HTTPServerHandler } from "./HTTPServerHandler.ts";
 
 /**
  * Base class for the *Multitrack Core* app.
@@ -10,6 +11,7 @@ class MultitrackCore{
     private subscribed: driver[] = [];
     public discoverer = new Discoverer("multitrack", 5130);
     public wsserver = new WSServerHandler(8031);
+    public httpserver = new HTTPServerHandler(8030);
 
     public run(){
         this.discoverer.attachCallbacks({
@@ -19,7 +21,8 @@ class MultitrackCore{
             onMessageReceived: this.dispatch
         })
 
-        this.wsserver.run()
+        this.httpserver.run();
+        this.wsserver.run();
     }
 
     /**

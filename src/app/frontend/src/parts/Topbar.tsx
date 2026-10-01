@@ -9,7 +9,7 @@ function Topbar(p: {setShowSettings: Setter<boolean>}) {
     return(
         <nav>
             <div class="topbar-left">
-                <h1>Multitrack <i>Core</i></h1>
+                <img src="/favicon.svg" /><h1>Multitrack <i>Core</i></h1>
             </div>
             <div class="topbar-right">
                 <button onclick={() => p.setShowSettings(true)}><i class="fa-solid fa-right-from-bracket"></i></button>
@@ -39,4 +39,4 @@ function QuickAccess(props: {icon: string, children: JSXElement[] | JSXElement})
     )
 }
 
-export default Topbar
+export default Topbar; QuickAccess

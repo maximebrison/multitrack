@@ -9,6 +9,13 @@
 
     .topbar-left{
         width: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .topbar-left > img{
+        height: 45px;
     }
 
     .topbar-left > h1{

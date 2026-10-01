@@ -54,21 +54,21 @@ function MapLibre() {
         themeController?.addExtraHandler(themeHandler);
     })
 
-    const addLocation = () => {
-        const popup = new Popup({offset: 25})
-            .setHTML(`
-                <h1>Radio ABC123Z</h1><br />
-                <i>Last seen at Long. 4.959351978617836, Lat. 50.40292135661877</i><br />
-                <a href='http://crouton.net'>link</a>
-            `)
+    // const addLocation = () => {
+    //     const popup = new Popup({offset: 25})
+    //         .setHTML(`
+    //             <h1>Radio ABC123Z</h1><br />
+    //             <i>Last seen at Long. 4.959351978617836, Lat. 50.40292135661877</i><br />
+    //             <a href='http://crouton.net'>link</a>
+    //         `)
 
-        new Marker()
-            .setLngLat([4.959351978617836, 50.40292135661877])
-            .setPopup(popup)
-            .addTo(map)
+    //     new Marker()
+    //         .setLngLat([4.959351978617836, 50.40292135661877])
+    //         .setPopup(popup)
+    //         .addTo(map)
 
-        console.log("Added location");
-    }
+    //     console.log("Added location");
+    // }
 
     const themeHandler = () => {
         map.setStyle(null); // To ease the reloading of the map, it flickers otherwise

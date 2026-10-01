@@ -4,12 +4,12 @@ import { SocketContext } from "../ctx/SocketContext";
 import type { envelope } from "../controllers/SocketController";
 import { UtilitiesContext } from "../ctx/UtilitiesContext";
 
-type driver = {
-    id: string,
-    name: string,
-    ws_port: string,
-    radio_type: string
-}
+// type driver = {
+//     id: string,
+//     name: string,
+//     ws_port: string,
+//     radio_type: string
+// }
 
 function Settings(p: {setter: Setter<boolean>}){
     const socketController = useContext(SocketContext);
