@@ -3,3 +3,4 @@
 venv
 private
 .DS_Store
+**/belgium.pmtiles
