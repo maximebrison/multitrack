@@ -1,18 +1,18 @@
 import { log } from "console"
 import { WebSocketServer, type WebSocket } from "ws"
-import type { envelope, signedEnvelope, wsserverCallbacks } from "./@types/multitrack.js"
+import type { envelope, signedEnvelope, wsServerCallbacks } from "../@types/multitrack.d.ts"
 import { v4 as uuid4 } from "uuid";
 
 export class WSServerHandler{
     public port: number;
     public clients: Map<string, WebSocket> = new Map<string, WebSocket>();
-    private callbacks!: wsserverCallbacks;
+    private callbacks!: wsServerCallbacks;
 
     constructor(port: number){
         this.port = port;
     }
     
-    public attachCallbacks(callbacks: wsserverCallbacks){
+    public attachCallbacks(callbacks: wsServerCallbacks){
         this.callbacks = callbacks
     }
 

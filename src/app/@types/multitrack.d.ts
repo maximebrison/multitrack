@@ -9,22 +9,35 @@ export type signedEnvelope = {
     envelope: envelope
 }
 
-export type driver = {
+export type pluginInfo = {
+    ID: string,
+    IP: string,
+    port: number
+}
+
+export type dataFromPlugin = {
     type: string,
     main_ID: string,
-    actions: string[],
-    text: string,
-    position: [number, number],
-    status: string,
-    last_updated: Date,
-    ws_port: number,
-    ws_ip : string
+    model: string,
+    serial: string,
+    last_updated: string,
+    position: {
+        timestamp: string,
+        latitude: number,
+        longitude: number
+    } | null
+    texts: string | string[] | null
+    status: string | null
 }
 
 export type discovererCallbacks = {
     sendWSMessage: (se: signedEnvelope) => void
 }
 
-export type wsserverCallbacks = {
+export type wsServerCallbacks = {
     onMessageReceived: (se: signedEnvelope) => void
+}
+
+export type httpServerCallbacks = {
+    onDataReceived: (data: any) => void
 }

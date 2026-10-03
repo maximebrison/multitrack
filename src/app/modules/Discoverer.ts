@@ -2,21 +2,17 @@ import { log } from "node:console"
 import { networkInterfaces } from "node:os"
 import ip from "ip"
 import dgram from "dgram"
-import type { discovererCallbacks, driver, signedEnvelope } from "./@types/multitrack.js"
+import type { discovererCallbacks, pluginInfo, signedEnvelope } from "../@types/multitrack.js"
 
 /**
- * **Discoverer** is used for :
- * - Finding drivers across the subnet of the host running the application.
- * - Managing driver subscription.
- * - Connecting and maintaining connection with subscribed drivers.
- * - Getting and sending message from/to the drivers.
+ * **Discoverer** is used for finding drivers across the subnet of the host running the application.
  * 
  * @param message The message to broadcast. 
  * @param broadcastPort The port to broadcast to. 
  */
 export class Discoverer{
     public broadcastPort: number;
-    private discovered: driver[] = [];
+    private discovered: pluginInfo[] = [];
     private message: string;
     private callbacks!: discovererCallbacks;
 

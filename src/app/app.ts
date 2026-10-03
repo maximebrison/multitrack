@@ -1,28 +1,31 @@
-import { Discoverer } from "./Discoverer.ts";
+import { Discoverer } from "./modules/Discoverer.ts";
 import { log } from "node:console";
-import type { driver, envelope, signedEnvelope } from "./@types/multitrack.js";
-import { WSServerHandler } from "./WSServerHandler.ts";
-import { HTTPServerHandler } from "./HTTPServerHandler.ts";
+import type { dataFromPlugin, pluginInfo, envelope, signedEnvelope } from "./@types/multitrack.js";
+import { WSServerHandler } from "./modules/WSServerHandler.ts";
+import { HTTPServerHandler } from "./modules/HTTPServerHandler.ts";
 
 /**
  * Base class for the *Multitrack Core* app.
  */
 class MultitrackCore{
-    private subscribed: driver[] = [];
+    private subscribed: pluginInfo[] = [];
     public discoverer = new Discoverer("multitrack", 5130);
-    public wsserver = new WSServerHandler(8031);
-    public httpserver = new HTTPServerHandler(8030);
+    public ws = new WSServerHandler(8031);
+    public http = new HTTPServerHandler(8030);
 
     public run(){
         this.discoverer.attachCallbacks({
             sendWSMessage: this.send
         })
-        this.wsserver.attachCallbacks({
-            onMessageReceived: this.dispatch
+        this.ws.attachCallbacks({
+            onMessageReceived: this.dispatchEnvelopes
+        })
+        this.http.attachCallbacks({
+            onDataReceived: this.dispatchPluginData
         })
 
-        this.httpserver.run();
-        this.wsserver.run();
+        this.http.run();
+        this.ws.run();
     }
 
     /**
@@ -34,11 +37,11 @@ class MultitrackCore{
      */
     private send = (se: signedEnvelope) => {
         if(se.client_id === "everyone"){
-            this.wsserver.clients.forEach((v, _) => {
+            this.ws.clients.forEach((v, _) => {
                 v.send(JSON.stringify(se.envelope))
             })
         } else{
-            const client = this.wsserver.clients.get(se.client_id);
+            const client = this.ws.clients.get(se.client_id);
 
             if(client !== undefined){
                 client.send(JSON.stringify(se.envelope));
@@ -51,13 +54,24 @@ class MultitrackCore{
      * 
      * @param se **signedEnvelope**, containing the clientId plus the actual **envelope**.
      */
-    private dispatch = (se: signedEnvelope) => {
+    private dispatchEnvelopes = (se: signedEnvelope) => {
         log(`Dispatching envelope to ${se.envelope.dest}`)
         switch(se.envelope.dest){
             case "discoverer":
                 this.discoverer.localDispatch(se);
                 break;
         }
+    }
+
+    /**
+     * Dispatches data received from the plugin.
+     * 
+     * @param data list of radios data in bulk
+     */
+    private dispatchPluginData = (data: dataFromPlugin[]) => {
+        data.forEach((v) => {
+
+        })
     }
 }
 

@@ -28,7 +28,7 @@ function MapLibre() {
                 sources: {
                 protomaps: {
                     type: "vector",
-                    url: "pmtiles://"+location.origin+"/belgium.pmtiles",
+                    url: "pmtiles://"+location.origin+"/map.pmtiles",
                     attribution: "© <a href='https://openstreetmap.org'>OpenStreetMap</a> contributors",
                 },
                 },
