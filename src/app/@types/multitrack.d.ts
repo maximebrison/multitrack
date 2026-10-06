@@ -10,9 +10,11 @@ export type signedEnvelope = {
 }
 
 export type pluginInfo = {
-    ID: string,
-    IP: string,
-    port: number
+    id: string,
+    ip_address: string,
+    port: Number,
+    actions: string[],
+    text: boolean
 }
 
 export type dataFromPlugin = {

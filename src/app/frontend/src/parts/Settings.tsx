@@ -1,31 +1,9 @@
-import { createSignal, For, onMount, useContext, type Setter } from "solid-js";
+import { createSignal, Match, Switch, type Setter } from "solid-js";
 import "./settings.css"
-import { SocketContext } from "../ctx/SocketContext";
-import type { envelope } from "../controllers/SocketController";
-import { UtilitiesContext } from "../ctx/UtilitiesContext";
-
-// type driver = {
-//     id: string,
-//     name: string,
-//     ws_port: string,
-//     radio_type: string
-// }
+import Discover from "./SettingsDiscover";
 
 function Settings(p: {setter: Setter<boolean>}){
-    const socketController = useContext(SocketContext);
-    const utilitiesController = useContext(UtilitiesContext);
-    const [res, setRes] = createSignal<string[]>([]);
-
-    onMount(() => {
-        socketController?.registerMailbox('settings-drivers', (e: envelope) => {
-            console.log(e.payload);
-            
-            if(e.payload){
-                let driver = e.payload
-                setRes((prev: string[]) => [...prev, driver]);
-            }
-        })
-    })
+    const [page, setPage] = createSignal<string>("");
 
     return(
         <div 
@@ -36,21 +14,19 @@ function Settings(p: {setter: Setter<boolean>}){
                 class="settings-modal-content"
                 onclick={(e) => e.stopPropagation()}    
             >
-                <button
-                    onclick={() => {
-                        socketController?.send("discoverer", "discover")
-                    }}
-                >
-                    Discover
-                </button>
-                <div>
-                    <For each={res()}>
-                        {(i) => (
-                            <div>
-                                <span>{i}</span><button onclick={() => utilitiesController?.notify({success: true, msg: "test"})}>Adopt</button>
-                            </div>
-                        )}
-                    </For>
+                <div class="settings-modal-menu">
+                    <h1>General</h1>
+                    <button onclick={() => setPage("info")}><i class="fa-solid fa-info"></i>Info</button>
+                    <h1>Plugins</h1>
+                    <button onclick={() => setPage("discover")}><i class="fa-solid fa-tower-broadcast"></i>Discover</button>
+                    <button onclick={() => setPage("manage")}><i class="fa-solid fa-list-check"></i>Manage</button>
+                </div>
+                <div class="settings-modal-page">
+                    <Switch fallback={<div>err</div>}>
+                        <Match when={page() === "discover"}>
+                            <Discover />
+                        </Match>
+                    </Switch>
                 </div>
             </div>
         </div>

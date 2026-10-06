@@ -4,3 +4,4 @@ class PluginInfo(BaseModel):
     id: str
     port: int
     actions: list[str]
+    text: bool

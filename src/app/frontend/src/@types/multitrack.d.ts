@@ -4,14 +4,10 @@ export type envelope = {
     payload: string | null
 }
 
-export type driver = {
-    type: string,
-    main_ID: string,
+export type pluginInfo = {
+    id: string,
+    ip_address: string | undefined,
+    port: Number,
     actions: string[],
-    text: string,
-    position: [number, number],
-    status: string,
-    last_updated: Date,
-    ws_port: number,
-    ws_ip : string
+    text: boolean
 }

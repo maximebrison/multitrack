@@ -12,6 +12,8 @@
 }
 
 .settings-modal-content{
+    display: flex;
+    flex-direction: row;
     width: 60%;
     height: 60%;
     background-color: var(--card-bg);
@@ -19,4 +21,46 @@
     box-shadow: 
         0 4px 8px 0 rgba(0, 0, 0, 0.2), 
         0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.settings-modal-menu{
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 auto;
+    gap: 0;
+    width: 250px;
+    height: auto;
+    margin-bottom: 15px;
+    overflow-y: auto;
+}
+
+.settings-modal-menu > h1{
+    width: 100%;
+    margin: 15px 0;
+    font-size: 1.2em;
+    text-align: center;
+}
+
+.settings-modal-menu > button{
+    font-size: 1em;
+    width: 100%;
+    min-height: 35px;
+    border: none;
+    background-color: transparent;
+    text-align: left;
+}
+
+.settings-modal-menu > button:hover{
+    background-color: var(--alternate-bg);
+}
+
+.settings-modal-menu > button > i{
+    margin-right: 5px;
+}
+
+.settings-modal-page{
+    width: calc(100% - 250px);
+    height: 100%;
+    background-color: var(--alternate-card-bg);
+    border-radius: 0 12px 12px 0;
 }

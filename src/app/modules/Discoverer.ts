@@ -1,4 +1,4 @@
-import { log } from "node:console"
+import { error, log } from "node:console"
 import { networkInterfaces } from "node:os"
 import ip from "ip"
 import dgram from "dgram"
@@ -46,16 +46,25 @@ export class Discoverer{
 
         socket.on('message', (msg, rinfo) => {
             log(`Received ${msg.toString()} from ${rinfo.address}`)
-            const se: signedEnvelope = {
-                client_id: clientId,
-                envelope: {
-                    dest: "settings-drivers",
-                    action: "respond",
-                    payload: msg.toString()
-                }
-            }
 
-            this.callbacks.sendWSMessage(se)
+            try{
+                const info: pluginInfo = JSON.parse(msg.toString())
+
+                info.ip_address = rinfo.address;
+
+                const se: signedEnvelope = {
+                    client_id: clientId,
+                    envelope: {
+                        dest: "settings-plugins",
+                        action: "respond",
+                        payload: JSON.stringify(info)
+                    }
+                }
+
+                this.callbacks.sendWSMessage(se)
+            }catch(e){
+                error(`Error while unpacking info from ${rinfo.address}. Received \n${msg.toString()}`)
+            }
         })
 
         socket.bind(0);

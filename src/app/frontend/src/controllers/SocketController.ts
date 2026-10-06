@@ -1,10 +1,5 @@
 import { type Setter } from "solid-js";
-
-export type envelope = {
-    dest: string,
-    action: string,
-    payload: string | null
-}
+import type { envelope } from "../@types/multitrack";
 
 export class SocketController{
     public status: boolean = false

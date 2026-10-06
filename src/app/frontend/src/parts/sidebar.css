@@ -19,7 +19,7 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        background-color: var(--alternate-bg);
+        background-color: var(--alternate-card-bg);
         border-radius: 7px;
         padding: 5px 10px;
     }
@@ -34,14 +34,6 @@
     .sidebar-item > .buttons {
         display: flex;
         gap: 15px;
-    }
-
-    .sidebar-item > .buttons button{
-        font-size: 1em;
-        background-color: var(--card-bg);
-        border: 1px solid var(--border);
-        padding: 5px 15px;
-        border-radius: 7px;
     }
 
     .sidebar-item > table{
