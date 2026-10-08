@@ -1,7 +1,7 @@
+from .models import PluginInfo
 import asyncio
 import json
 import logging
-from multitrack.models import PluginInfo
 
 log = logging.getLogger("UDPListener")
 
@@ -11,16 +11,12 @@ class UDPListener():
         self.discovery_msg = discovery_msg
         self.plugin_info = plugin_info
 
-    async def run(self, stop: asyncio.Event):
+    async def run(self):
         loop = asyncio.get_running_loop()
         self.transport, _ = await loop.create_datagram_endpoint(
             lambda: _DiscoveryProtocol(self.discovery_msg, self.plugin_info),
             local_addr=("0.0.0.0", self.discovery_port)
         )
-        try:
-            await stop.wait()
-        finally:
-            self.transport.close()
 
     def stop(self):
         self.transport.close()

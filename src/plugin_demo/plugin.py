@@ -1,44 +1,53 @@
-from multitrack import MultitrackPlugin
-from multitrack.MultitrackBridge import MultitrackBridge
+from multitrack import MultitrackAPI, SerialBridge, SerialDriver, BaseActionModel, BaseTextModel, ChannelModel
+from serial import Serial
 
-class Bridge(MultitrackBridge):
-    polling_rate = 0.5
-    def poll(self):
-        print("hey")
+class ICOMDriver(SerialDriver):
+    def demux(self, cmd: str):
+        print(cmd)
 
-bridge = Bridge()
-
-bridge.bind_action(
-    "kill",
-    lambda target : print(f"kill {target}")
+driver = ICOMDriver(
+    serial=Serial(),
+    bol=b"\x02",
+    eol=b"\x03"
 )
 
-bridge.bind_action(
-    "stun",
-    lambda target : print(f"stun {target}")
+@driver.action(label="kill")
+def kill(p: BaseActionModel):
+    return f"Killing {p.target}"
+
+@driver.action(label="stun")
+def stun(p: BaseActionModel):
+    return f"*SET,IDAS,TXSTUN,IND,{p.target}"
+
+@driver.action(label="revive")
+def revive(p: BaseActionModel):
+    return f"Reviving {p.target}"
+
+@driver.action(label="get_status")
+def get_status(p: BaseActionModel):
+    return f"Getting status from {p.target}"
+
+@driver.action(label="get_position")
+def get_position(p: BaseActionModel):
+    return f"Getting position from {p.target}"
+
+@driver.action(label="send_text")
+def send_text(p: BaseTextModel):
+    return f"Sending {p.msg} to {p.target}"
+
+@driver.action(label="get_channel", scope="local", method="GET")
+def get_channel():
+    return '*GET,MCH,SEL'
+
+@driver.action(label="set_channel", scope="local")
+def set_channel(p: ChannelModel):
+    return f'*SET,MCH,SEL,{p.channel}'
+
+bridge = SerialBridge(
+    driver=driver
 )
 
-bridge.bind_action(
-    "revive",
-    lambda target : print(f"revive {target}")
-)
-
-bridge.bind_action(
-    "get_status",
-    lambda target : print(f"requesting status from {target}")
-)
-
-bridge.bind_action(
-    "get_position",
-    lambda target : print(f"requesting position from {target}")
-)
-
-bridge.bind_text(
-    lambda target, text :
-        print(f"sending {text} to {target}")
-)
-
-app = MultitrackPlugin(
+app = MultitrackAPI(
     http_port=5131,
     discovery_port=5130,
     discovery_msg="multitrack",
