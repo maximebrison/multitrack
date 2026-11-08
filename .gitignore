@@ -1,10 +1,12 @@
 /build
 venv
 private
-.DS_Store
-**/belgium.pmtiles
+**/map.pmtiles
+__pycache__/
 
-# Node
+# Database and config files
+*.db
+*.ini
 
 # Logs
 logs
