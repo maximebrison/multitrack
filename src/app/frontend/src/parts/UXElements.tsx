@@ -1,5 +1,5 @@
 import { onCleanup, onMount, type Setter } from "solid-js"
-import "./uxelements.css"
+import "./css/uxelements.css"
 
 export type NotifModel = {
     success: boolean

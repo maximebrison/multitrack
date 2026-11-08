@@ -1,5 +1,5 @@
 import { createSignal, Match, Switch, type Setter } from "solid-js";
-import "./settings.css"
+import "./css/settings.css"
 import Discover from "./SettingsDiscover";
 
 function Settings(p: {setter: Setter<boolean>}){
@@ -16,10 +16,10 @@ function Settings(p: {setter: Setter<boolean>}){
             >
                 <div class="settings-modal-menu">
                     <h1>General</h1>
-                    <button onclick={() => setPage("info")}><i class="fa-solid fa-info"></i>Info</button>
+                    <button onclick={() => setPage("info")}><span><i class="fa-solid fa-info"></i>Info</span></button>
                     <h1>Plugins</h1>
-                    <button onclick={() => setPage("discover")}><i class="fa-solid fa-tower-broadcast"></i>Discover</button>
-                    <button onclick={() => setPage("manage")}><i class="fa-solid fa-list-check"></i>Manage</button>
+                    <button onclick={() => setPage("discover")}><span><i class="fa-solid fa-tower-broadcast"></i>Discover</span></button>
+                    <button onclick={() => setPage("manage")}><span><i class="fa-solid fa-list-check"></i>Manage</span></button>
                 </div>
                 <div class="settings-modal-page">
                     <Switch fallback={<div>err</div>}>

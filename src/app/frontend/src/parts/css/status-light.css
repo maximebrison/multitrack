@@ -1,4 +1,4 @@
-.status-light{
+.online-indicator{
     height: 50px;
     display: flex;
     flex-direction: row;
@@ -9,24 +9,24 @@
     background-color: var(--card-bg);
 }
 
-.status-light > .led{
+.online-indicator > .led{
     width: 50%;
     aspect-ratio: 1 / 1;
     border-radius: 50%;
 }
 
-.status-light.online{
+.online-indicator.online{
     border-color: var(--accent2);
 }
 
-.status-light.offline{
+.online-indicator.offline{
     border-color: var(--accent1);
 }
 
-.status-light.online > .led{
+.online-indicator.online > .led{
     background-color: var(--accent2);
 }
 
-.status-light.offline > .led{
+.online-indicator.offline > .led{
     background-color: var(--accent1);
 }

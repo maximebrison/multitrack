@@ -5,16 +5,16 @@ import Mainframe from "./parts/Mainframe";
 import Settings from "./parts/Settings";
 import type { NotifModel } from "./parts/UXElements";
 import Notification from "./parts/UXElements";
-import { UtilitiesContext } from "./ctx/UtilitiesContext";
+import { AppContext } from "./ctx/AppContext";
 
 
 function App() {
+    const ctx = useContext(AppContext)!;
     const [showSettings, setShowSettings] = createSignal(false);
     const [notif, setNotif] = createSignal<NotifModel|null>(null);
-    const utilitiesController = useContext(UtilitiesContext);
 
     onMount(() => {
-        utilitiesController?.init(setNotif);
+        ctx.utils.init(setNotif);
     })
 
     return (

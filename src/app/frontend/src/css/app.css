@@ -27,16 +27,22 @@ body{
 }
 
 button{
-    font-size: 1em;
-    background-color: var(--alternate-bg);
+    background-color: var(--button-bg);
     border: 1px solid var(--border);
-    padding: 5px 15px;
-    border-radius: 7px;
 }
 
 button:hover{
-    background-color: var(--alternate-card-bg);
+    background-color: var(--hover-bg);
 }
+
+button:active{
+    background-color: var(--active-bg);
+}
+
+span > i.fa-solid{
+    margin-right: 5px;
+}
+
 
 .app{
     display: flex;

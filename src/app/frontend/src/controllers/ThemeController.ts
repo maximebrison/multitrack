@@ -35,7 +35,7 @@ export class ThemeController{
         link.href = toDarkTheme ? darkTheme : lightTheme;
         localStorage.setItem("dark", `${this.dark}`)
 
-        this._extras.forEach((fn) => fn());
+        this._extras.forEach((fn) => fn(this.dark));
 
         return this.dark;
     }

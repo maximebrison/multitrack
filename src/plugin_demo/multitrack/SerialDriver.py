@@ -1,9 +1,7 @@
-from typing import Callable, Literal, get_type_hints
-from pydantic import BaseModel
 from serial import Serial
-from .models import CoreAction, Action
+from .models import CoreData
 import logging
-import inspect
+from datetime import datetime
 
 log = logging.getLogger("SerialDriver")
 
@@ -12,12 +10,11 @@ class SerialDriver():
     Abstract class that serves as a template for **Serial communication**.\n
     Here's how you write your driver :
     - Create a new class **inheriting** from this one
-    - Overwrite the **demux()** method with your own
+    - Overwrite the **parser()** method with your own
     - Provide a **Serial object** and specific **bol/eol** when initializing the class
-    - Bind specific **actions** using the **@driver.action()** decorator
-    - Bind it to the **SerialBridge**
+    - Bind it to the **MultitrackAPI**
     """
-    def __init__(self, serial: Serial, bol: bytes, eol: bytes, MSGCH: int = -1, DEFCH: int = -1, verbose: bool = False):
+    def __init__(self, serial: Serial, bol: bytes, eol: bytes, MSGCH: int = -1, DEFCH: int = -1, blocking_timeout: int = 5, verbose: bool = False):
         # Misc. properties
         self.verbose = verbose
         # Serial obj. and properties
@@ -26,88 +23,43 @@ class SerialDriver():
         self.eol = eol
         self.MSGCH = MSGCH
         self.DEFCH = DEFCH
-        # Radio comm. handlers
-        self.actions: dict[str, Action] = {}
+        self.blocking_timeout = blocking_timeout
 
-    def send_command(self, cmd: str):
+    def on_startup(self) -> list[str]:
         """
-        Gets a raw **str** command and sends it to the Serial port.
+        Actions executed when connecting to the serial port.
         """
-        try:
-            self.serial.write(self.bol + cmd.encode("utf-8") + self.eol)
-        except Exception as e:
-            log.error(f"Couldn't send {cmd}: {e}")
-
-    def receive_command(self):
-        """
-        Reads raw **bytes** command from the Serial port, then sends them to the **demux()**
-        """
-        self.demux("sample")
+        return []
     
-    def demux(self, cmd: str):
+    def set_plugin_id(self, id: str):
+        self.plugin_id = id
+    
+    def parser(self, cmd: str) -> CoreData:
         """
         Place here every **command** your radio may receive.\n
-        Returns sanitized output for the *Core*
+        Returns sanitized **PluginData** for the *Core*
         """
-        pass
+        return CoreData(
+            plugin_id=self.plugin_id,
+            entity_id=None,
+            timestamp=datetime.now().timestamp(),
+            type="err",
+            success=False,
+            data=None
+        )
 
-    # Decorators definitions
-    def action(
-        self, 
-        label: str,
-        scope: Literal["local", "remote"] = "remote",
-        method: Literal["GET", "POST"] = "POST"
-    ):
+    def nmea_to_decimal(self, value: str, hemisphere: str):
         """
-        @Decorator to bind actions to serial commands.\n
-        **Params:**
-        ```
-        label: str # unique name of the action
-        scope: Literal["local", "remote"] # whether the action is destined to the local radio (e.g. set_channel) or a remote (e.g. get_position)
-        method: Literal["GET", "POST"] # defines the HTTP method to which the API binds the action
-        ```
-        **Example:**
-        ```
-        @driver.action(label="stun")
-        def stun(payload: BaseActionModel):
-            return f"*SET,IDAS,TXSTUN,IND,{payload.target}"
-        ```
+        Small utility to convert **NMEA** coordinates to **decimal**.
         """
-        def action(func: Callable):
-            def nfunc(payload: type[BaseModel] | None = None):
-                if self.verbose: log.info(f"Executed {func(payload)}")
-                if payload: return func(payload)
-                return func()
-            try:
-                hints = get_type_hints(func)
-                param = next(iter(inspect.signature(func).parameters))
-                payload_type = hints[param]
-            except StopIteration as e:
-                payload_type = None
-            self.actions[label] = Action(
-                handler=nfunc,
-                model=payload_type,
-                scope=scope,
-                method=method
-            )
-            print(f"{label} bound.")
-            print(f"Model: {payload_type}")
-            return nfunc
-        return action
+        dot = value.index(".")
+        degrees = int(value[:dot - 2])
+        minutes = float(value[dot - 2:])
+        dec = degrees + minutes / 60
+        return -dec if hemisphere in ("S", "W") else dec
 
-    def available_actions(self):
-        actions: list[str]= []
-        for label, action in self.actions.items():
-            if action.model:
-                actions.append(CoreAction(
-                    label=label,
-                    model=action.model.model_json_schema(),
-                    scope=action.scope
-                ).model_dump_json())
-            else: 
-                actions.append(CoreAction(
-                    label=label,
-                    model=action.model,
-                    scope=action.scope
-                ).model_dump_json())
-        return actions
+    def encode_wrap(self, cmd: str):
+        """
+        Encode the command in utf-8, then wraps it with *bol* and *eol* characters.
+        """
+        return self.bol + cmd.encode() + self.eol

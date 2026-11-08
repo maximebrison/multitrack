@@ -12,6 +12,7 @@
         display: flex;
         flex-direction: row;
         align-items: center;
+        justify-content: center;
     }
 
     .topbar-left > img{
@@ -28,12 +29,11 @@
         display: flex;
         flex-direction: row-reverse;
         align-items: center;
+        justify-content: center;
         gap: 10px;
     }
 
     .topbar-right > button, .topbar-quick-access > button{
-        background-color: var(--card-bg);
-        border: none;
         height: 50px;
         aspect-ratio: 1 / 1;
         font-size: 1.2em;
@@ -86,9 +86,11 @@
 
     .topbar-left{
         width: 50%;
+        justify-content: left;
     }
 
     .topbar-right{
         width: 50%;
+        justify-content: right;
     }
 }

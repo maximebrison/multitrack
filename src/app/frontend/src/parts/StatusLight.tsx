@@ -1,17 +1,17 @@
 import { createSignal, onMount, useContext } from "solid-js";
-import { SocketContext } from "../ctx/SocketContext";
-import "./statuslight.css"
+import "./css/status-light.css"
+import { AppContext } from "../ctx/AppContext";
 
 function StatusLight() {
-    const socketController = useContext(SocketContext);
-    const [online, setOnline] = createSignal(socketController?.status);
+    const ctx = useContext(AppContext)!;
+    const [online, setOnline] = createSignal(ctx.socket.status);
     
     onMount(() => {
-        socketController?.subscribeIndicator(setOnline);
+        ctx.socket.subscribeIndicator(setOnline);
     })
 
     return(
-        <div onclick={() => socketController?.run()} class={`status-light ${(online()) ? "online" : "offline"}`}><div class="led"></div>{(online()) ? "ONLINE" : "OFFLINE"}</div>
+        <div onclick={() => ctx.socket.run()} class={`online-indicator ${(online()) ? "online" : "offline"}`}><div class="led"></div>{(online()) ? "ONLINE" : "OFFLINE"}</div>
     )
 }
 

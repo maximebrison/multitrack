@@ -1,0 +1,91 @@
+.settings-plugins-discover {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 12px;
+}
+
+.settings-plugins-discover-button{
+    width: 100%;
+    border-radius: 7px;
+    font-size: 1.5em;
+}
+
+.settings-plugins-discover-list{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    overflow: auto;
+}
+
+.settings-plugins-discover-plugin{
+    width: 100%;
+    border-radius: 7px;
+    padding: 12px;
+    background-color: var(--alternate-bg);
+}
+
+.settings-plugins-discover-plugin > div{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.settings-plugins-discover-plugin > div *{
+    user-select: text;
+    cursor: default;
+}
+
+.settings-plugins-discover-plugin > div > h1{
+    width: 100%;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+    margin: 0;
+    padding-bottom: 5px;
+    font-size: 1.5em;
+}
+
+.settings-plugins-discover-plugin-line{
+    width: 100%;
+    min-height: 30px;
+    display: flex;
+    flex-direction: row;
+    border-bottom: 1px solid var(--border);
+    padding: 5px 0;
+}
+
+.settings-plugins-discover-plugin-line .key{
+    display: flex;
+    align-items: center;
+    width: 150px;
+    color: var(--subtext);
+}
+
+.settings-plugins-discover-plugin-line .value{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.settings-plugins-discover-plugin-line span{
+    height: 25px;
+    padding: 0 5px;
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    background-color: var(--button-bg);
+}
+
+.settings-plugins-discover-plugin > div > button{
+    border-radius: 7px;
+    width: 100%;
+    font-size: 1.2em;
+    padding: 5px 0;
+}

@@ -1,0 +1,108 @@
+@media (min-width: 0px){
+    .sidebar{
+        width: 100%;
+        max-height: 50%;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding: 10px;
+        background-color: var(--bg);
+        border-radius: 0 0px 12px 12px;
+        overflow: auto;
+    }
+
+    .sidebar-plugin{
+        width: 100%;
+        height: fit-content;
+        border-radius: 12px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding: 10px;
+        background-color: var(--alternate-bg);
+        border: 1px solid var(--modal-bg);
+    }
+
+    .sidebar-plugin > h1{
+        width: 100%;
+        font-size: 2em;
+        text-align: center;
+        margin: 0;
+        padding-bottom: 5px;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .sidebar-item{
+        height: fit-content;
+        width: 100%;
+        display: flex;
+        gap: 10px;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--sidebar-item-bg);
+        border-radius: 7px;
+        padding: 5px 10px;
+        cursor: pointer;
+        border: 1px solid var(--hover-bg);
+    }
+
+    .sidebar-item:hover{
+        background-color: var(--hover-bg);
+    }
+
+    .sidebar-item:active{
+        background-color: var(--active-bg);
+    }
+
+    .sidebar-item-status{
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .sidebar-item-status-light{
+        width: 15px;
+        height: 15px;
+        border-radius: 15px;
+        background-color: var(--accent2);
+    }
+
+    .sidebar-item-status-light.fresh{
+        background-color: green;
+    }
+
+    .sidebar-item-status-light.verify{
+        background-color: orange;
+    }
+
+    .sidebar-item-status-light.warn{
+        background-color: red;
+    }
+
+    .sidebar-item-info{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .sidebar-item-info span{
+        color: var(--subtext);
+    }
+
+    .sidebar-item-info > h1 {
+        width: 100%;
+        font-size: 1.3em;
+        margin: 0;
+        border-bottom: 1px solid var(--text);
+    }
+}
+
+@media (min-width: 1000px){
+    .sidebar{
+        width: 25%;
+        max-height: 100%;
+        border-radius: 0 12px 12px 0;
+    }
+}
