@@ -1,0 +1,32 @@
+.online-indicator{
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    border: 5px double;
+    border-radius: 7px;
+    padding: 10px 15px;
+    gap: 10px;
+    background-color: var(--card-bg);
+}
+
+.online-indicator > .led{
+    width: 50%;
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+}
+
+.online-indicator.online{
+    border-color: var(--accent2);
+}
+
+.online-indicator.offline{
+    border-color: var(--accent1);
+}
+
+.online-indicator.online > .led{
+    background-color: var(--accent2);
+}
+
+.online-indicator.offline > .led{
+    background-color: var(--accent1);
+}

@@ -1,0 +1,18 @@
+.maplibregl-ctrl, .maplibregl-ctrl *{
+    background-color: var(--card-bg)!important;
+    color: var(--text)!important;
+}
+
+.maplibregl-popup-tip{
+    background-color: transparent;
+    border-top-color: var(--alternate-bg)!important;
+}
+
+.maplibregl-popup-content{
+    background-color: var(--alternate-bg)!important;
+    border-radius: 7px;
+}
+
+.maplibregl-popup-close-button{
+    font-size: 2em;
+}

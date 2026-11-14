@@ -1,0 +1,15 @@
+:root{
+	--bg: #1A1A1C;
+	--alternate-bg: #202022;
+	--modal-bg: #2A2A2C;
+	--button-bg: #2A2A2C;
+	--hover-bg: #303032;
+	--active-bg: #3A3A3C;
+	--sidebar-item-bg: #2A2A2C;
+	--border: #303032;
+	--text: #EEEEF0;
+	--subtext: #929294;
+	--accent1: #9B1D20;
+	--accent2: #568259;
+	--accent3: #5972D9;
+}
